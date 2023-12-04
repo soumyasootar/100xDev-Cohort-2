@@ -6,6 +6,10 @@
 */
 
 function findLargestElement(numbers) {
+  
+    return  numbers.reduce((res , curr)=>{
+        return ( res > curr ? res : curr)
+    },numbers[0])
     
 }
 

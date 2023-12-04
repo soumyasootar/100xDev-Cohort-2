@@ -16,6 +16,46 @@
   Once you've implemented the logic, test your code by running
 */
 
-class Calculator {}
+class Calculator {
+  constructor() {
+    this.result = 0;
+  }
+
+  add(a) {
+    this.result = this.result + a;
+  }
+  subtract(a) {
+    this.result = this.result - a;
+  }
+  multiply(a) {
+    this.result = this.result * a;
+  }
+  divide(a) {
+    if (a === 0) {
+      throw new Error("Division by zero is not allowed");
+    }
+    this.result = this.result / a;
+  }
+  clear() {
+    this.result = 0;
+  }
+  getResult() {
+    return this.result;
+  }
+  calculate(expression) {
+    const result = eval(expression);
+    if (isNaN(result) || result == "Infinity") {
+      throw new Error("Invalid arithmetic expression");
+    }
+    this.result += result;
+    return result;
+  }
+}
+
+let x = new Calculator();
+x.add(5);
+console.log(x.getResult());
+
+console.log(eval("(2.5 + 1.5) * 3"));
 
 module.exports = Calculator;
