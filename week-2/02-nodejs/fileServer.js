@@ -17,5 +17,33 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 
+app.get("/files", (req, res) => {
+  fs.readdir(path.join(__dirname, "./files"), (err, files) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    res.json({files});
+  })
+})
+
+
+app.get("/files/:filename", (req, res) => {
+  fs.readFile(path.join(__dirname, "./files/",req.params.filename),"utf8" , (err, files) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    res.json(files);
+  })
+})
+
+app.get("*",(req,res)=>{
+    res.status(500).json({message : "Wrong Path"})
+})
+
+app.listen(5000,()=>{
+  console.log("Server Started");
+})
+
+
 
 module.exports = app;
